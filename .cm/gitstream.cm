@@ -1,0 +1,31 @@
+# -*- mode: yaml -*-
+
+manifest:
+  version: 1.0
+automations:
+  # Inform PR authors when they fail to reference Jira tickets in the PR title or description.
+  label_missing_jira_info:
+    if:
+      - {{ not (has.jira_ticket_in_title or has.jira_ticket_in_desc) }}
+    run:
+      - action: add-label@v1
+        args:
+          label: "missing-jira"
+          color: {{ colors.red }}
+      - action: add-comment@v1
+        args:
+          comment: |
+            This PR is missing a Jira ticket reference in the title or description.
+            Please add a Jira ticket reference to the title or description of this PR.
+
+# +----------------------------------------------------------------------------+
+# | Custom Expressions                                                         |
+# | https://docs.gitstream.cm/how-it-works/#custom-expressions                 |
+# +----------------------------------------------------------------------------+
+
+has:
+  jira_ticket_in_title: {{ pr.title | includes(regex=r/\b[A-Za-z]+-\d+\b/) }}
+  jira_ticket_in_desc: {{ pr.description | includes(regex=r/atlassian.net\/browse\/\w{1,}-\d{3,4}/) }}
+
+colors:
+  red: 'b60205'
