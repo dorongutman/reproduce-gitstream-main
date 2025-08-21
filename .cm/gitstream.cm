@@ -29,7 +29,7 @@ automations:
           comment: |
             CHECKS DUMP:
             ```yaml
-            {{ pr.checks | dump(2) | safe }}
+            {{ pr.checks | dump(2) | indent(12) | safe }}
             ```
 # +----------------------------------------------------------------------------+
 # | Custom Expressions                                                         |
