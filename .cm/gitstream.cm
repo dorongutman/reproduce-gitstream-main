@@ -19,6 +19,8 @@ automations:
             Please add a Jira ticket reference to the title or description of this PR.
 
   dump_checks:
+    on:
+      - comment_added
     if:
       - true
     run:
