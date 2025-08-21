@@ -27,7 +27,10 @@ automations:
       - action: add-comment@v1
         args:
           comment: |
-            CHECKS DUMP {{ pr.checks | dump | safe }}
+            CHECKS DUMP:
+            ```yaml
+            {{ pr.checks | dump(2) | safe }}
+            ```
 # +----------------------------------------------------------------------------+
 # | Custom Expressions                                                         |
 # | https://docs.gitstream.cm/how-it-works/#custom-expressions                 |
