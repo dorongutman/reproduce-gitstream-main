@@ -18,6 +18,14 @@ automations:
             This PR is missing a Jira ticket reference in the title or description.
             Please add a Jira ticket reference to the title or description of this PR.
 
+  dump_checks:
+    if:
+      - true
+    run:
+      - action: add-comment@v1
+        args:
+          comment: |
+            CHECKS DUMP {{ pr.checks | dump | safe }}
 # +----------------------------------------------------------------------------+
 # | Custom Expressions                                                         |
 # | https://docs.gitstream.cm/how-it-works/#custom-expressions                 |
