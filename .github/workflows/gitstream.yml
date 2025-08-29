@@ -35,6 +35,8 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     name: gitStream workflow automation
+    env: 
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Adding PR Url
         run: |
