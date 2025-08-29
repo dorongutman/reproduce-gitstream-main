@@ -10,6 +10,8 @@
  * @param {function} callback - The callback function to call with the result.
  */
 
+const DEBUG = true;
+
 const getCheckStatus = async (commitShaOrBranch, checkName, githubOrg, githubRepo, token, callback) => {
     try {
         let error = null;
@@ -22,6 +24,10 @@ const getCheckStatus = async (commitShaOrBranch, checkName, githubOrg, githubRep
             'User-Agent': 'gitStream-plugin'
         };
         
+        if (DEBUG) {
+            console.log('GitHub API URL:', apiUrl);
+        }
+
         // Add authorization header if token is provided
         if (token) {
             headers['Authorization'] = `Bearer ${token}`;
@@ -34,10 +40,17 @@ const getCheckStatus = async (commitShaOrBranch, checkName, githubOrg, githubRep
         });
 
         if (!response.ok) {
+            if (DEBUG) {
+                console.log('GitHub API request failed:', response);
+            }
             throw new Error(`GitHub API request failed: ${response.status} ${response.statusText}`);
         }
 
         const data = await response.json();
+
+        if (DEBUG) {
+            console.log('GitHub API response:', data);
+        }
         
         // Find the check run with the specified name
         const checkRun = data.find(check => check.context === checkName);
