@@ -20,7 +20,7 @@ automations:
 
   check_status_success:
     if:
-      - {{ branch.name | (checkStatus('my-external-service', repo.owner, repo.name, env.GITHUB_TOKEN) == 'success') }}
+      - {{ branch.name | (getCheckStatus('my-external-service', repo.owner, repo.name, env.GITHUB_TOKEN) == 'success') }}
     run:
       - action: add-label@v1
         args:
@@ -29,7 +29,7 @@ automations:
 
   check_status_failure:
     if:
-      - {{ branch.name | (checkStatus('my-external-service', repo.owner, repo.name, env.GITHUB_TOKEN) == 'failure') }}
+      - {{ branch.name | (getCheckStatus('my-external-service', repo.owner, repo.name, env.GITHUB_TOKEN) == 'failure') }}
     run:
       - action: add-label@v1
         args:
@@ -60,3 +60,4 @@ has:
 
 colors:
   red: 'b60205'
+  green: '0e8a16'
