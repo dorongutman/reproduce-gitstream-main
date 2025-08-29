@@ -18,6 +18,24 @@ automations:
             This PR is missing a Jira ticket reference in the title or description.
             Please add a Jira ticket reference to the title or description of this PR.
 
+  check_status_success:
+    if:
+      - {{ branch.name | (checkStatus('my-external-service', repo.owner, repo.name, env.GITHUB_TOKEN) == 'success') }}
+    run:
+      - action: add-label@v1
+        args:
+          label: "status-success"
+          color: {{ colors.green }}
+
+  check_status_failure:
+    if:
+      - {{ branch.name | (checkStatus('my-external-service', repo.owner, repo.name, env.GITHUB_TOKEN) == 'failure') }}
+    run:
+      - action: add-label@v1
+        args:
+          label: "status-failure"
+          color: {{ colors.red }}
+
   dump_checks:
     on:
       - comment_added
