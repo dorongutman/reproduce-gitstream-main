@@ -64,7 +64,7 @@ const checkStatusEquals = async (commitShaOrBranch, checkName, expectedState, gi
         return callback(null, checkRun.state === expectedState);
         
     } catch (exception) {
-        return callback('Error fetching check status: ' + exception, null);
+        return callback('Error checking status: ' + exception, false);
     }
 };
 
