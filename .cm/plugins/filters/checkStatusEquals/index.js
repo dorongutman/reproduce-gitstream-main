@@ -2,13 +2,14 @@
 /**
  * @module checkStatusEquals
  * @description Check if the status of a check run for a given commit equals the expected state.
- * @param {string} commitShaOrBranch - The SHA of the commit or branch to get the check status for.
+ * @param {string} input - The SHA of the commit or branch to get the check status for.
  * @param {string} checkName - The name of the check to get the status for.
  * @param {string} expectedState - The expected state of the check.
  * @param {string} githubOrg - The organization of the repository.
  * @param {string} githubRepo - The name of the repository.
  * @param {string} token - The GitHub token to use for authentication.
- * @param {function} callback - The callback function to call with the result.
+ * @example {{ branch.name | checkStatusEquals('my-external-service', 'success', repo.owner, repo.name, env.GITHUB_TOKEN) }}
+ * @returns {boolean} Returns true if the check status equals the expected state, false otherwise.
  */
 
 const DEBUG = true;
