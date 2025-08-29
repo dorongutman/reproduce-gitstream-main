@@ -14,7 +14,7 @@
 
 const DEBUG = true;
 
-const checkStatusEquals = (commitShaOrBranch, checkName, expectedState, githubOrg, githubRepo, token) => { //, callback) => {
+const checkStatusEquals = async (commitShaOrBranch, checkName, expectedState, githubOrg, githubRepo, token) => { //, callback) => {
     return false;
     // return callback(null, false);
     // try {
@@ -71,6 +71,6 @@ const checkStatusEquals = (commitShaOrBranch, checkName, expectedState, githubOr
 };
 
 module.exports = {
-    async: false,
+    async: true,
     filter: checkStatusEquals,
 };
