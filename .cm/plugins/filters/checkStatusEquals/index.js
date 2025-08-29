@@ -15,6 +15,7 @@
 const DEBUG = true;
 
 const checkStatusEquals = async (commitShaOrBranch, checkName, expectedState, githubOrg, githubRepo, token, callback) => {
+    return false;
     return callback(null, false);
     try {
         // GitHub API endpoint for check runs
@@ -70,6 +71,6 @@ const checkStatusEquals = async (commitShaOrBranch, checkName, expectedState, gi
 };
 
 module.exports = {
-    async: true,
+    async: false,
     filter: checkStatusEquals,
 };
