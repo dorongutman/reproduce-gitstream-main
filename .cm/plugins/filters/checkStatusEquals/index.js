@@ -14,9 +14,9 @@
 
 const DEBUG = true;
 
-const checkStatusEquals = async (commitShaOrBranch, checkName, expectedState, githubOrg, githubRepo, token) => { //, callback) => {
-    return false;
-    // return callback(null, false);
+const checkStatusEquals = async (commitShaOrBranch, checkName, expectedState, githubOrg, githubRepo, token, callback) => { //, callback) => {
+    // return false;
+    return callback(null, false);
     // try {
     //     // GitHub API endpoint for check runs
     //     const apiUrl = `https://api.github.com/repos/${githubOrg}/${githubRepo}/statuses/${commitShaOrBranch}`;
