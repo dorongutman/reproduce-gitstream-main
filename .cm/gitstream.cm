@@ -4,19 +4,19 @@ manifest:
   version: 1.0
 automations:
   # Inform PR authors when they fail to reference Jira tickets in the PR title or description.
-  label_missing_jira_info:
-    if:
-      - {{ not (has.jira_ticket_in_title or has.jira_ticket_in_desc) }}
-    run:
-      - action: add-label@v1
-        args:
-          label: "missing-jira"
-          color: {{ colors.red }}
-      - action: add-comment@v1
-        args:
-          comment: |
-            This PR is missing a Jira ticket reference in the title or description.
-            Please add a Jira ticket reference to the title or description of this PR.
+  # label_missing_jira_info:
+  #   if:
+  #     - {{ not (has.jira_ticket_in_title or has.jira_ticket_in_desc) }}
+  #   run:
+  #     - action: add-label@v1
+  #       args:
+  #         label: "missing-jira"
+  #         color: {{ colors.red }}
+  #     - action: add-comment@v1
+  #       args:
+  #         comment: |
+  #           This PR is missing a Jira ticket reference in the title or description.
+  #           Please add a Jira ticket reference to the title or description of this PR.
 
   # check_status_success:
   #   if:
@@ -36,23 +36,41 @@ automations:
   #         label: "status-failure"
   #         color: {{ colors.red }}
 
-  check_status_success:
-    if:
-      - {{ branch.name | checkStatusEquals('my-external-service', 'success', repo.owner, repo.name, env.GITHUB_TOKEN) }}
-    run:
-      - action: add-label@v1
-        args:
-          label: "status-success"
-          color: {{ colors.green }}
+  # check_status_success:
+  #   if:
+  #     - {{ branch.name | checkStatusEquals('my-external-service', 'success', repo.owner, repo.name, env.GITHUB_TOKEN) }}
+  #   run:
+  #     - action: add-label@v1
+  #       args:
+  #         label: "status-success"
+  #         color: {{ colors.green }}
 
-  check_status_failure:
+  # check_status_failure:
+  #   if:
+  #     - {{ branch.name | checkStatusEquals('my-external-service', 'failure', repo.owner, repo.name, env.GITHUB_TOKEN) }}
+  #   run:
+  #     - action: add-label@v1
+  #       args:
+  #         label: "status-failure"
+  #         color: {{ colors.red }}
+
+  falser:
     if:
-      - {{ branch.name | checkStatusEquals('my-external-service', 'failure', repo.owner, repo.name, env.GITHUB_TOKEN) }}
+      - {{ "" | falser }}
     run:
       - action: add-label@v1
         args:
-          label: "status-failure"
+          label: "falser"
           color: {{ colors.red }}
+
+  truer:
+    if:
+      - {{ "" | truer }}
+    run:
+      - action: add-label@v1
+        args:
+          label: "truer"
+          color: {{ colors.green }}
 
   dump_checks:
     on:
@@ -72,9 +90,9 @@ automations:
 # | https://docs.gitstream.cm/how-it-works/#custom-expressions                 |
 # +----------------------------------------------------------------------------+
 
-has:
-  jira_ticket_in_title: {{ pr.title | includes(regex=r/\b[A-Za-z]+-\d+\b/) }}
-  jira_ticket_in_desc: {{ pr.description | includes(regex=r/atlassian.net\/browse\/\w{1,}-\d{3,4}/) }}
+# has:
+#   jira_ticket_in_title: {{ pr.title | includes(regex=r/\b[A-Za-z]+-\d+\b/) }}
+#   jira_ticket_in_desc: {{ pr.description | includes(regex=r/atlassian.net\/browse\/\w{1,}-\d{3,4}/) }}
 
 colors:
   red: 'b60205'
