@@ -54,14 +54,14 @@ automations:
   #         label: "status-failure"
   #         color: {{ colors.red }}
 
-  falser:
-    if:
-      - {{ "" | falser }}
-    run:
-      - action: add-label@v1
-        args:
-          label: "falser"
-          color: {{ colors.red }}
+  # falser:
+  #   if:
+  #     - {{ "" | falser }}
+  #   run:
+  #     - action: add-label@v1
+  #       args:
+  #         label: "falser"
+  #         color: {{ colors.red }}
 
   # truer:
   #   if:

@@ -1,0 +1,17 @@
+# -*- mode: yaml -*-
+
+manifest:
+  version: 1.0
+automations:
+  truer:
+    if:
+      - {{ "" | falserAsync }}
+    run:
+      - action: add-label@v1
+        args:
+          label: "falser-async"
+          color: {{ colors.red }}
+
+colors:
+  red: 'b60205'
+  green: '0e8a16'
