@@ -3,7 +3,7 @@
 manifest:
   version: 1.0
 automations:
-  truer:
+  truerSync:
     if:
       - {{ "" | truerSync }}
     run:

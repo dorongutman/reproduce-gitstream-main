@@ -3,7 +3,7 @@
 manifest:
   version: 1.0
 automations:
-  truer:
+  falserAsync:
     if:
       - {{ "" | falserAsync }}
     run:
