@@ -85,6 +85,11 @@ automations:
             ```yaml
             {{ pr.checks | dump(2) | indent(12) | safe }}
             ```
+
+            COMMIT STATUSES DUMP:
+            ```yaml
+            {{ COMMIT_STATUSES | dump(2) | indent(12) }}
+            ```
 # +----------------------------------------------------------------------------+
 # | Custom Expressions                                                         |
 # | https://docs.gitstream.cm/how-it-works/#custom-expressions                 |
@@ -93,6 +98,8 @@ automations:
 # has:
 #   jira_ticket_in_title: {{ pr.title | includes(regex=r/\b[A-Za-z]+-\d+\b/) }}
 #   jira_ticket_in_desc: {{ pr.description | includes(regex=r/atlassian.net\/browse\/\w{1,}-\d{3,4}/) }}
+
+COMMIT_STATUSES: {{ "" | getCommitStatuses }}
 
 colors:
   red: 'b60205'
