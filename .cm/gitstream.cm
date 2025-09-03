@@ -72,6 +72,15 @@ automations:
   #         label: "truer"
   #         color: {{ colors.green }}
 
+  use_checks:
+    if:
+      - {{ COMMIT_STATUSES | filter(attr='name',term='my-external-service') | match(attr='conclusion',term='success') | any }}
+    run:
+      - action: add-comment@v1
+        args:
+          comment: |
+            check found
+
   dump_checks:
     on:
       - comment_added
