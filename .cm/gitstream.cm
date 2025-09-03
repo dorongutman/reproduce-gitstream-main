@@ -74,7 +74,7 @@ automations:
 
   use_checks:
     if:
-      - {{ COMMIT_STATUSES | filter(attr='name',term='my-external-service') | match(attr='conclusion',term='success') | some }}
+      - {{ did.passed_e2e_tests }}
     run:
       - action: add-comment@v1
         args:
@@ -109,6 +109,10 @@ automations:
 #   jira_ticket_in_desc: {{ pr.description | includes(regex=r/atlassian.net\/browse\/\w{1,}-\d{3,4}/) }}
 
 COMMIT_STATUSES: {{ "" | getCommitStatuses }}
+setup:
+  e2e_tests_check_name: my-external-service
+did:
+  passed_e2e_tests: {{ COMMIT_STATUSES | filter(attr='name',term=setup.e2e_tests_check_name) | match(attr='conclusion',term='success') | some }}
 
 colors:
   red: 'b60205'
